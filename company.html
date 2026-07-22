@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Company — AutoElite Motors</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+    }
+    nav .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #e8b400;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: #e8b400; }
+    nav ul a.active { color: #e8b400; }
+    nav .nav-cta {
+      background: #e8b400;
+      color: #111;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    nav .nav-cta:hover { background: #c99c00; }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 9rem 2.5rem 4rem;
+      background: linear-gradient(135deg, #0a0a0a 50%, #1c1c1c 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      right: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(232,180,0,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-header .badge {
+      display: inline-block;
+      background: #e8b400;
+      color: #111;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 3px;
+      margin-bottom: 1.2rem;
+    }
+    .page-header h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+    .page-header h1 span { color: #e8b400; }
+    .page-header p {
+      color: #aaa;
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* STATS STRIP */
+    .stats {
+      background: #e8b400;
+      display: flex;
+      justify-content: space-around;
+      padding: 1.5rem 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .stat { text-align: center; }
+    .stat .number { font-size: 1.8rem; font-weight: 800; color: #111; }
+    .stat .label { font-size: 0.8rem; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* SECTION SHARED */
+    section { padding: 5rem 2.5rem; }
+    .section-label {
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e8b400;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: #666;
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+    }
+
+    /* OUR STORY */
+    .story { background: #f7f7f7; }
+    .story-text {
+      max-width: 720px;
+      margin: 0 auto;
+      color: #444;
+      line-height: 1.8;
+      font-size: 1rem;
+      text-align: center;
+    }
+    .story-text p { margin-bottom: 1.2rem; }
+
+    /* LEADERSHIP TEAM */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .team-card {
+      text-align: center;
+      background: #fff;
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .team-card:hover { transform: translateY(-5px); box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
+    .team-avatar {
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 1.2rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+    }
+    .team-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .team-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #e8b400;
+      margin-bottom: 0.8rem;
+    }
+    .team-bio { font-size: 0.88rem; color: #666; line-height: 1.6; }
+
+    /* FOOTER */
+    footer {
+      background: #0a0a0a;
+      color: #666;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+    }
+    footer span { color: #e8b400; }
+
+    @media (max-width: 700px) {
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="index.html">&#9670; AutoElite</a>
+    <ul>
+      <li><a href="index.html#inventory">Inventory</a></li>
+      <li><a href="index.html#why-us">Why Us</a></li>
+      <li><a href="index.html#testimonials">Reviews</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="company.html" class="active">Company</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="contact.html">Get a Quote</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="badge">&#127970; About Us</div>
+    <h1>The People Behind <span>AutoElite</span></h1>
+    <p>Family-owned since 1998. Meet the team that's helped thousands of Detroit-area drivers find their perfect car.</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="number">1998</div><div class="label">Founded</div></div>
+    <div class="stat"><div class="number">25+</div><div class="label">Years in Business</div></div>
+    <div class="stat"><div class="number">40+</div><div class="label">Team Members</div></div>
+    <div class="stat"><div class="number">1,200+</div><div class="label">Cars Sold</div></div>
+  </div>
+
+  <!-- OUR STORY -->
+  <section class="story">
+    <div class="section-label">Our Story</div>
+    <h2 class="section-title">Built on Trust, Not Pressure</h2>
+    <div class="story-text">
+      <p>AutoElite Motors started in 1998 as a single-lot dealership on Detroit's east side, built on a simple idea: car buying shouldn't feel like a fight. No pushy sales tactics, no hidden fees — just honest people helping other people find a car they'll actually love.</p>
+      <p>Today we're still family-owned and still run by many of the same people who opened our doors nearly three decades ago. Every vehicle on our lot passes the same 150-point inspection we started with, and every deal is still handled by a real person who'll pick up the phone.</p>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP TEAM -->
+  <section id="team">
+    <div class="section-label">Leadership Team</div>
+    <h2 class="section-title">Meet Our Management</h2>
+    <p class="section-sub">The people setting the standard for how AutoElite treats every customer who walks through the door.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">&#128100;</div>
+        <div class="team-name">Robert Hayes</div>
+        <div class="team-title">Founder &amp; CEO</div>
+        <p class="team-bio">Opened AutoElite's doors in 1998 and still greets customers on the lot most Saturdays.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">&#128100;</div>
+        <div class="team-name">Linda Osei</div>
+        <div class="team-title">General Manager</div>
+        <p class="team-bio">Runs day-to-day operations and leads our 150-point inspection program.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">&#128100;</div>
+        <div class="team-name">Marcus Chen</div>
+        <div class="team-title">Sales Director</div>
+        <p class="team-bio">15 years in the business, with a zero-pressure philosophy he trains every rep on.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">&#128100;</div>
+        <div class="team-name">Angela Torres</div>
+        <div class="team-title">Finance Manager</div>
+        <p class="team-bio">Finds financing options for all credit types and explains every line of the paperwork.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">&#128100;</div>
+        <div class="team-name">David Kim</div>
+        <div class="team-title">Service Manager</div>
+        <p class="team-bio">Oversees inspections and repairs, ensuring every car on the lot is road-ready.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">&#128100;</div>
+        <div class="team-name">Priya Nair</div>
+        <div class="team-title">Customer Experience Lead</div>
+        <p class="team-bio">Makes sure every customer's questions get answered within the hour, every time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 <span>AutoElite Motors</span>. All rights reserved. &nbsp;|&nbsp; Built with care in Detroit, MI.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "autoelite-motors-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Test tooling for the AutoElite Motors static site. The site itself has no build system (see CLAUDE.md) — this package.json exists only to run Playwright tests.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+  }
+}

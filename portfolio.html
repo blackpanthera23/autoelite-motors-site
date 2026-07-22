@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — AutoElite Motors</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+    }
+    nav .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #e8b400;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: #e8b400; }
+    nav ul a.active { color: #e8b400; }
+    nav .nav-cta {
+      background: #e8b400;
+      color: #111;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    nav .nav-cta:hover { background: #c99c00; }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 9rem 2.5rem 4rem;
+      background: linear-gradient(135deg, #0a0a0a 50%, #1c1c1c 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      right: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(232,180,0,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-header .badge {
+      display: inline-block;
+      background: #e8b400;
+      color: #111;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 3px;
+      margin-bottom: 1.2rem;
+    }
+    .page-header h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+    .page-header h1 span { color: #e8b400; }
+    .page-header p {
+      color: #aaa;
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* STATS STRIP */
+    .stats {
+      background: #e8b400;
+      display: flex;
+      justify-content: space-around;
+      padding: 1.5rem 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .stat { text-align: center; }
+    .stat .number { font-size: 1.8rem; font-weight: 800; color: #111; }
+    .stat .label { font-size: 0.8rem; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* SECTION SHARED */
+    section { padding: 5rem 2.5rem; }
+    .section-label {
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e8b400;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: #666;
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+    }
+
+    /* PORTFOLIO / SALES */
+    .portfolio { background: #f7f7f7; }
+    .sale-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .sale-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .sale-card:hover { transform: translateY(-5px); box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
+    .sale-img {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .sale-body { padding: 1.4rem; }
+    .sale-tag-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem; }
+    .sale-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #e8b400;
+    }
+    .sold-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #1a7a3c;
+      background: #e6f4ea;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+    }
+    .sale-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .sale-specs { font-size: 0.85rem; color: #888; margin-bottom: 0.9rem; }
+    .sale-quote {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 0.9rem;
+      border-left: 3px solid #e8b400;
+      padding-left: 0.8rem;
+    }
+    .sale-buyer { font-weight: 700; font-size: 0.88rem; color: #111; }
+    .sale-buyer-role { font-size: 0.8rem; color: #999; }
+
+    /* FOOTER */
+    footer {
+      background: #0a0a0a;
+      color: #666;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+    }
+    footer span { color: #e8b400; }
+
+    @media (max-width: 700px) {
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="index.html">&#9670; AutoElite</a>
+    <ul>
+      <li><a href="index.html#inventory">Inventory</a></li>
+      <li><a href="index.html#why-us">Why Us</a></li>
+      <li><a href="index.html#testimonials">Reviews</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="contact.html">Get a Quote</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="badge">&#127942; Success Stories</div>
+    <h1>Vehicles We've <span>Delivered</span></h1>
+    <p>A look at recent deliveries and the customers behind them. Real cars, real buyers, real happy endings.</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="number">1,200+</div><div class="label">Cars Delivered</div></div>
+    <div class="stat"><div class="number">98%</div><div class="label">Would Buy Again</div></div>
+    <div class="stat"><div class="number">2.1 hrs</div><div class="label">Avg. Time to Keys</div></div>
+    <div class="stat"><div class="number">25+</div><div class="label">Years Delivering</div></div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="section-label">Our Track Record</div>
+    <h2 class="section-title">Recent Success Stories</h2>
+    <p class="section-sub">Every sale is a story. Here are a few of our favorites from the past few months.</p>
+
+    <div class="sale-grid">
+      <div class="sale-card">
+        <div class="sale-img">&#128663;</div>
+        <div class="sale-body">
+          <div class="sale-tag-row">
+            <span class="sale-tag">Sedan</span>
+            <span class="sold-badge">Sold</span>
+          </div>
+          <div class="sale-name">2023 BMW 5 Series</div>
+          <div class="sale-specs">Delivered to James R. &bull; Detroit, MI</div>
+          <p class="sale-quote">"Found my dream car at a price I couldn't believe. The whole process took less than 2 hours."</p>
+          <div class="sale-buyer">James R.</div>
+          <div class="sale-buyer-role">First-time BMW owner</div>
+        </div>
+      </div>
+
+      <div class="sale-card">
+        <div class="sale-img">&#128662;</div>
+        <div class="sale-body">
+          <div class="sale-tag-row">
+            <span class="sale-tag">Sedan</span>
+            <span class="sold-badge">Sold</span>
+          </div>
+          <div class="sale-name">2022 Honda Accord</div>
+          <div class="sale-specs">Delivered to Maria L. &bull; Dearborn, MI</div>
+          <p class="sale-quote">"They worked with my credit situation and got me into a great Honda. Patient and genuinely helpful."</p>
+          <div class="sale-buyer">Maria L.</div>
+          <div class="sale-buyer-role">Repeat customer</div>
+        </div>
+      </div>
+
+      <div class="sale-card">
+        <div class="sale-img">&#128664;</div>
+        <div class="sale-body">
+          <div class="sale-tag-row">
+            <span class="sale-tag">Pickup</span>
+            <span class="sold-badge">Sold</span>
+          </div>
+          <div class="sale-name">2022 Ford F-150</div>
+          <div class="sale-specs">Delivered to Tyler M. &bull; Livonia, MI</div>
+          <p class="sale-quote">"As a first-time buyer I was nervous, but AutoElite made it easy. Drove home the same day."</p>
+          <div class="sale-buyer">Tyler M.</div>
+          <div class="sale-buyer-role">First-time buyer</div>
+        </div>
+      </div>
+
+      <div class="sale-card">
+        <div class="sale-img">&#9889;</div>
+        <div class="sale-body">
+          <div class="sale-tag-row">
+            <span class="sale-tag">Electric</span>
+            <span class="sold-badge">Sold</span>
+          </div>
+          <div class="sale-name">2023 Tesla Model 3</div>
+          <div class="sale-specs">Delivered to Priya S. &bull; Ann Arbor, MI</div>
+          <p class="sale-quote">"My first EV and the team walked me through everything, from charging to financing. Love it."</p>
+          <div class="sale-buyer">Priya S.</div>
+          <div class="sale-buyer-role">First EV owner</div>
+        </div>
+      </div>
+
+      <div class="sale-card">
+        <div class="sale-img">&#128666;</div>
+        <div class="sale-body">
+          <div class="sale-tag-row">
+            <span class="sale-tag">SUV</span>
+            <span class="sold-badge">Sold</span>
+          </div>
+          <div class="sale-name">2023 Honda CR-V</div>
+          <div class="sale-specs">Delivered to the Nguyen Family &bull; Troy, MI</div>
+          <p class="sale-quote">"Needed something safe and roomy for the kids. They found us the perfect fit within our budget."</p>
+          <div class="sale-buyer">Nguyen Family</div>
+          <div class="sale-buyer-role">Growing family</div>
+        </div>
+      </div>
+
+      <div class="sale-card">
+        <div class="sale-img">&#127942;</div>
+        <div class="sale-body">
+          <div class="sale-tag-row">
+            <span class="sale-tag">Luxury</span>
+            <span class="sold-badge">Sold</span>
+          </div>
+          <div class="sale-name">2023 Mercedes C300</div>
+          <div class="sale-specs">Delivered to David K. &bull; Grosse Pointe, MI</div>
+          <p class="sale-quote">"Transparent pricing, no hidden fees, no pressure. Exactly what a luxury purchase should feel like."</p>
+          <div class="sale-buyer">David K.</div>
+          <div class="sale-buyer-role">Returning customer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 <span>AutoElite Motors</span>. All rights reserved. &nbsp;|&nbsp; Built with care in Detroit, MI.</p>
+  </footer>
+
+</body>
+</html>

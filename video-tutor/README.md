@@ -26,7 +26,7 @@ npm run mock                         # demo mode: canned poker walkthrough, no A
 
 ## Cost (rough)
 
-A 1-minute video at 60 frames × ~350 tokens is about 25k input tokens. That's around US$0.10–0.25 per analysis on Opus 5.5. Each question costs a fraction of a cent.
+A 1-minute video at 60 frames × ~200 tokens (landscape) to ~620 tokens (vertical Short) is about 12k–37k input tokens. That's around US$0.10–0.25 per analysis on Opus 5.5, including output. Each question costs a fraction of a cent.
 
 ## Files
 

@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Video Tutor",
+  "version": "0.1.0",
+  "description": "Watches YouTube videos with you and explains what's happening, the risks, and what to improve.",
+  "background": { "service_worker": "background.js" },
+  "host_permissions": ["http://localhost:8787/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["coach-ui.js", "youtube.js"],
+      "css": ["coach.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
